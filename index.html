@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Yellowtail&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>HelloSunshine</title>
+
+    <style>
+      .page-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding-top: 20px; /* Add padding between nav and hero */
+      }
+
+      /* Navigation bar*/
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #f6f6f6;
+        border-bottom: 5px solid #fe4f02;
+      }
+
+      .heading-container {
+        max-width: 800px;
+        justify-content: space-evenly;
+        display: flex;
+        align-items: center;
+      }
+      /* Style the navigation bar */
+      .navbar {
+        width: 100vw; /* full viewport width */
+        position: relative;
+        left: 0;
+        right: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fe4f02;
+        padding: 18px 32px;
+        border-radius: 0 0 30px 30px; /* rounded bottom corners */
+        box-sizing: border-box;
+        z-index: 1000; /* keep it above other content */
+      }
+
+      .navbar-inner {
+        max-width: 800px;
+        margin: 0 auto; /* Center the navbar */
+        width: 100%; /* Full width on small screens */
+        display: flex;
+        justify-content: space-between;
+        align-items: center; /* Center items vertically */
+        box-sizing: border-box;
+      }
+
+      .nav-link {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.1rem;
+        margin-left: 32px;
+        transition: color 0.2s;
+      }
+      .nav-link:hover,
+      .nav-link.active {
+        color: #222;
+      }
+      .nav-left .nav-link {
+        margin-left: 0;
+      }
+
+      /* Hero section - circles photo and text */
+      .hero {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 75vh;
+        background: #ffffff;
+        padding: 20px 0 0 0;
+
+        max-width: 800px; /* Limit width */
+        width: 100%; /* Full width on small screens */
+        margin: 0 auto; /* Center horizontally */
+        box-sizing: border-box;
+        overflow-x: hidden; /* Prevent horizontal scroll from big circles */
+      }
+
+      /* NB Hero visual has no internal content */
+      .hero-visual {
+        position: relative;
+        width: 320px;
+        height: 320px;
+        margin-right: 40px;
+        flex-shrink: 0;
+        overflow: visible;
+      }
+
+      .circle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.5;
+      }
+      .circle1 {
+        width: 320px;
+        height: 320px;
+        background: #785c46;
+        left: 0px;
+        top: 0px;
+        z-index: 1;
+      }
+      .circle2 {
+        width: 220px;
+        height: 220px;
+        background: #e54a07;
+        left: 60px;
+        top: 50px;
+        z-index: 1;
+      }
+      .hero-photo {
+        width: 250px;
+        height: 250px;
+        left: 35px;
+        top: 35px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 6px solid #fff;
+        box-shadow: 0 0 32px 0 #fe4f02, 0 8px 32px rgba(0, 0, 0, 0.15);
+        position: absolute;
+        left: 55px;
+        top: 55px;
+        z-index: 2;
+        transition: box-shadow 0.3s;
+      }
+      .hero-photo:hover {
+        box-shadow: 0 0 40px 0 #fe4f02, 0 12px 40px rgba(0, 0, 0, 0.18);
+      }
+      .hero-text h1 {
+        font-size: 90px;
+        color: #fe4f02;
+        font-weight: 200;
+        margin-bottom: 18px;
+      }
+      .hero-text h2 {
+        font-size: 3.5rem;
+        color: #222;
+        font-weight: 200;
+        line-height: 1.4;
+      }
+
+      /* What I bring - include UVP link*/
+      .uvp {
+        background: #f4f6f7;
+        width: 100vw; /* full viewport width */
+        position: relative; /* to avoid horizontal scroll caused by vw */
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw; /* pull left edge to viewport left */
+        margin-right: -50vw; /* pull right edge to viewport right */
+        padding: 32px 20px; /* internal padding for content */
+        box-sizing: border-box;
+        color: #fff;
+        text-align: center;
+        border-radius: 0 0 60px 60px; /* remove rounded corners for full width */
+        overflow-wrap: break-word;
+      }
+
+      .uvp-inner {
+        max-width: 800px;
+        margin: 0 auto;
+        padding-left: 20px;
+        padding-right: 20px;
+        box-sizing: border-box;
+      }
+
+      .uvp h3 {
+        color: #fe4f02;
+        font-size: 2rem;
+        margin: 5px 0 30px 0;
+      }
+      .uvp-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .uvp-list li {
+        background: linear-gradient(to right, #f6f6f6, #dedcdd);
+        color: #222;
+        border-radius: 25px;
+        padding: 20px 40px;
+        font-size: 1.2rem;
+        min-width: 200px;
+        max-width: 280px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        transition: background 0.3s, color 0.3s;
+        cursor: pointer;
+      }
+      .uvp-list li:hover {
+        background: #fe4f02;
+        color: #fff;
+      }
+
+      /* Button styling */
+      .slide-in-btn {
+        display: inline-block;
+        margin: 40px auto 0 auto;
+        padding: 15px 40px;
+        background-color: #fe4f02;
+        color: white;
+        font-family: "Open Sans", sans-serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        border-radius: 50px;
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(254, 79, 2, 0.3);
+        cursor: pointer;
+
+        /* Center horizontally */
+        position: relative;
+        left: 100vw; /* Start off-screen right */
+        animation: slideInFromRight 1s forwards ease-out;
+      }
+
+      /* Keyframes for sliding in from right */
+      @keyframes slideInFromRight {
+        0% {
+          left: 100vw; /* Off-screen right */
+          opacity: 0;
+        }
+        100% {
+          left: 0; /* Anchored in place */
+          opacity: 1;
+        }
+      }
+
+      /* Add hover effect */
+      .slide-in-btn:hover {
+        background-color: #ffb347;
+        color: #222;
+        box-shadow: 0 6px 20px rgba(254, 79, 2, 0.5);
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+      }
+
+      /* Let's chat / contact section CTA */
+      .contact-section {
+        background: #fff;
+        border-radius: 30px;
+        max-width: 800px;
+        margin: 40px auto 0 auto;
+        padding: 32px 20px;
+        box-sizing: border-box;
+        text-align: center;
+        color: #222;
+        box-shadow: 0 2px 10px rgba(254, 79, 2, 0.05);
+      }
+      .contact-section h4 {
+        color: #fe4f02;
+        font-family: "Open Sans", sans-serif;
+        font-size: 1.7rem;
+        margin-bottom: 12px;
+      }
+      .contact-section p {
+        font-size: 1.1rem;
+        margin-bottom: 24px;
+      }
+      .cta-btn {
+        display: inline-block;
+        background: #fe4f02;
+        color: #fff;
+        border-radius: 50px;
+        padding: 18px 40px;
+        font-size: 1.3rem;
+        font-family: "Open Sans", sans-serif;
+        text-decoration: none;
+        margin-bottom: 24px;
+        margin-top: 8px;
+        box-shadow: 0 4px 16px rgba(254, 79, 2, 0.16);
+        transition: background 0.2s, box-shadow 0.2s;
+        position: relative;
+      }
+      .cta-btn:hover {
+        background: #ffb347;
+        color: #222;
+        box-shadow: 0 8px 32px rgba(254, 79, 2, 0.22);
+      }
+      .cta-btn .sun {
+        display: inline-block;
+        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      }
+      .cta-btn:hover .sun {
+        transform: rotate(45deg) scale(1.2);
+        filter: drop-shadow(0 0 8px #ffeb3b);
+      }
+      .contact-links {
+        margin-top: 24px;
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+      }
+      .contact-links a {
+        color: #fe4f02;
+        text-decoration: underline;
+        font-size: 1.1rem;
+        transition: color 0.2s;
+      }
+      .contact-links a:hover {
+        color: #222;
+      }
+
+      /* Footer */
+      .footer {
+        background: #f6f6f6;
+        color: #808080;
+        text-align: center;
+        padding: 24px 0 16px 0;
+        font-size: 1rem;
+        border-radius: 0 0 30px 30px;
+        margin-top: 40px;
+      }
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+
+      .footer-left {
+        text-align: left;
+        flex: 1;
+      }
+      .footer-center {
+        text-align: center;
+        flex: 1;
+      }
+
+      .back-to-top {
+        display: block;
+        margin-top: 10px;
+        color: #fe4f02;
+        font-weight: bold;
+        transition: color 0.2s;
+      }
+      .back-to-top:hover {
+        color: #222;
+      }
+
+      /* enable smooth scroll up to top */
+      html {
+        scroll-behavior: smooth;
+      }
+      /* spacing between sections */
+      .hero,
+      .uvp,
+      .contact-section,
+      .footer {
+        margin-bottom: 20px;
+      }
+
+      /* Sometimes 100vw causes horizontal scroll if vertical scroll is present. This is the fix */
+      body {
+        overflow-x: hidden;
+      }
+
+      /* Responsive design */
+      @media (max-width: 700px) {
+        .hero {
+          flex-direction: column;
+          min-height: auto;
+          padding: 20px 10px;
+        }
+        .hero-visual {
+          margin-right: 0;
+          margin-bottom: 20px;
+          width: 250px;
+          height: 250px;
+        }
+        .circle1 {
+          width: 250px;
+          height: 250px;
+          left: 0;
+          top: 0;
+        }
+        .circle2 {
+          width: 180px;
+          height: 180px;
+          left: 40px;
+          top: 30px;
+        }
+        .hero-photo {
+          width: 180px;
+          height: 180px;
+          left: 30px;
+          top: 30px;
+        }
+        .hero-text h1 {
+          font-size: 1.8rem;
+          margin-left: 0;
+          text-align: center;
+        }
+        .hero-text h2 {
+          font-size: 1rem;
+          text-align: center;
+        }
+        .uvp-list {
+          flex-direction: column;
+          gap: 12px;
+        }
+        .contact-links {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+
+      /* Styling */
+
+      /* Use Yellowtail for headings or special text */
+      h1,
+      h2,
+      .special-heading {
+        font-family: "Yellowtail", cursive;
+      }
+
+      /* Use Open Sans Light (weight 300) for body or lighter text */
+      body,
+      p,
+      .light-text {
+        font-family: "Open Sans", sans-serif;
+        font-weight: 200;
+      }
+
+      /* Use Open Sans Bold (weight 700) for emphasis or bold text */
+      strong,
+      b,
+      .bold-text {
+        font-family: "Open Sans", sans-serif;
+        font-weight: 200;
+      }
+
+      h1,
+      .hero-text h1 {
+        font-family: "Yellowtail", cursive;
+        font-size: 90px;
+        margin: 5px 0 0 0;
+        color: #fe4f02;
+      }
+
+      h2,
+      .hero-text h2 {
+        font-family: "Yellowtail", cursive;
+        font-size: 80px;
+        margin: 10px 0 0 0;
+        color: #222;
+      }
+
+      h3 {
+        font-family: "Open Sans", sans-serif;
+        font-size: 20px;
+        margin: 10px 5px 0 0;
+      }
+
+      h4 {
+        font-family: "Open Sans", sans-serif;
+        font-size: 20px;
+        margin: 10px 20px;
+        padding: 25px;
+        border-radius: 10px;
+        color: #fe4f02;
+      }
+
+      body,
+      p {
+        font-family: "Open Sans", sans-serif;
+        font-weight: 200;
+        margin: 0;
+        padding: 0;
+        color: #222;
+      }
+
+      strong,
+      b,
+      .bold-text {
+        font-family: "Open Sans", sans-serif;
+        font-weight: 200;
+      }
+      ul {
+        display: block;
+        margin: 40px 0px 40px 0px;
+        text-align: center;
+        border: 1px;
+        padding: 0;
+        font-size: 20px;
+      }
+
+      h1,
+      h2 {
+        font-family: "Yellowtail", cursive;
+        margin-left: 0 !important;
+        text-align: left;
+      }
+
+      h3,
+      h4 {
+        font-family: "Open Sans", sans-serif;
+        margin-left: 0 !important;
+        text-align: left;
+      }
+
+      li {
+        list-style-type: none;
+        display: inline;
+        text-align: center;
+        padding: 15px 70px 15px 70px;
+        border: 1px solid #808080;
+        border-radius: 25px;
+        background: linear-gradient(to right, #f6f6f6, #dedcdd);
+        transition: all 200ms ease-in-out;
+        max-width: 33%;
+        margin: 0 auto;
+      }
+
+      li:hover {
+        background: #808080;
+        color: #f6f6f6;
+      }
+
+      body {
+        margin-top: 10px;
+        padding: 5px;
+      }
+
+      button {
+        display: inline-block;
+        margin: 0px 0px 20px 80px;
+        padding: 15px 80px 15px 80px;
+        background: #fe4f02;
+        color: #f6f6f6;
+        border: 5px solid #fe4f02;
+        border-radius: 50px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        font-size: 30px;
+      }
+
+      button:hover {
+        background: #f6f6f6;
+        color: #fe4f02;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <div class="nav-left">
+          <a href="#home" class="nav-link active">Home</a>
+        </div>
+        <div class="nav-right">
+          <a href="https://siobhangallagher.github.io/studio-notes/index.html" class="nav-link" target="_blank" rel="noopener noreferrer">Studio Notes</a>
+          <a href="#about" class="nav-link">About Me</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+      </div>
+    </nav>
+    <div class="page-container">
+      <section class="hero">
+        <div class="hero-visual">
+          <div class="circle circle1"></div>
+          <div class="circle circle2"></div>
+          <img
+            src="sg.me_holding-image.png"
+            alt="Siobhán's Photo"
+            class="hero-photo"
+          />
+        </div>
+        <div class="hero-text">
+          <h1>Hello Sunshine!</h1>
+          <h2>I'm Siobhán.</h2>
+          <br />
+          <br />
+          <h3>
+            As a UI & Web Design Enthusiast,<br />
+            I blend my business know-how <br />
+            with my design flair to craft user <br />
+            focussed impactful digital experiences!
+          </h3>
+        </div>
+      </section>
+
+      <section class="uvp">
+        <div class="uvp-inner">
+          <h3>What I bring</h3>
+          <ul class="uvp-list">
+            <li>30+ years’ experience</li>
+            <li>Project and event management</li>
+            <li>UX and UI – putting people first</li>
+            <li>Creative problem solving</li>
+          </ul>
+        </div>
+
+        <a href="your-uvp.pdf" target="_blank" class="slide-in-btn">
+          View my Unique Value Proposition
+        </a>
+      </section>
+
+      <section class="contact-section">
+        
+        <h3>
+          Have a project in mind?<br />
+          <br/>
+          <p>I’m open to work, freelance or remote opportunities in design, UI/UX
+          or content strategy.</p>
+
+
+<h3>
+  How can I help you <span class="sun">☀️</span>shine?
+</h3>
+
+<h3> 
+  Let's chat
+</h3>
+
+        <div class="contact-links">
+          <a href="mailto:hello@siobhnagallagher.me"> Email</a>
+   
+          <a
+            href="https://www.linkedin.com/in/siobhan-gallagher-282b8783"
+            target="_blank"
+            >LinkedIn</a
+          >
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-content">
+          <span class="footer-left">© Siobhan Gallagher 2025</span>
+          <span class="footer-center">Back to top ↑</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
