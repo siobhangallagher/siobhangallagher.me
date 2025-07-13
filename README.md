@@ -2,7 +2,7 @@
 
 Hey there! 👋Welcome to the code behind my website: www.siobhangallagher.me
 
-This project is now the home of coding journey 🌱
+This project is now the home of my coding journey 🌱
 
 💻 About This Project
 
